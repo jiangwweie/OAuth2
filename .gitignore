@@ -1,0 +1,6 @@
+.idea
+
+auth-server/target
+auth-server/.mvn
+*/.mvn
+*/target

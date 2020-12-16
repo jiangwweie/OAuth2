@@ -1,0 +1,25 @@
+dev-addr: 192.168.86.23
+
+server:
+  port: 7081
+  servlet:
+    session:
+      cookie:
+        name: loop-ms
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+
+security:
+  oauth2:
+    client:
+      #用户授权的端点。
+      user-authorization-uri: http://${dev-addr}:7080/oauth/authorize
+      #获取令牌的端点
+      access-token-uri: http://${dev-addr}:7080/oauth/token
+      client-secret: 123456
+      client-id: app
+    resource:
+      #资源端点，获取用户信息
+      user-info-uri: http://${dev-addr}:7080/user/info
