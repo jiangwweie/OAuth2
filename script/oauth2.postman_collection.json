@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "b7286fdd-309d-4b66-9296-34d0e82a56c4",
+		"name": "oauth2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "通过code请求token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "web",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7080/oauth/token?code=5ec9t6&grant_type=authorization_code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7080",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "5ec9t6"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "携带token访问接口",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a2f1a7fb-9f7f-405d-95ba-3e2e955b98da",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:7080/user/info",
+					"host": [
+						"localhost"
+					],
+					"port": "7080",
+					"path": [
+						"user",
+						"info"
+					]
+				},
+				"description": "获取资源设置Authorization为Bearer token"
+			},
+			"response": []
+		},
+		{
+			"name": "通过clientid和clientSecret请求code，需要在网页打开，进行登录，然后获取token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7080/oauth/authorize?client_id=web&client_secret=123456&response_type=code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7080",
+					"path": [
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "web"
+						},
+						{
+							"key": "client_secret",
+							"value": "123456"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						}
+					]
+				},
+				"description": "通过clientid和clientSecret请求code"
+			},
+			"response": []
+		},
+		{
+			"name": "credentials模式",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "web",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "select",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:7080/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7080",
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "表单提交client_id/secret  "
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
